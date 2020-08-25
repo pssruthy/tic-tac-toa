@@ -1,0 +1,16 @@
+.board {
+  margin: 0 auto;
+  padding: 10px;
+  height: 350px;
+  width: 350px;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.tile {
+  border: 1px solid gray;
+  height: 100px;
+  width: 100px;
+  margin: 6px;
+  text-align: center;
+}
