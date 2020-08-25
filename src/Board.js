@@ -8,19 +8,9 @@ class Board extends React.Component {
   }
 
   render() {
-    return (
-      <div className="board">
-        <Tile></Tile>
-        <Tile></Tile>
-        <Tile></Tile>
-        <Tile></Tile>
-        <Tile></Tile>
-        <Tile></Tile>
-        <Tile></Tile>
-        <Tile></Tile>
-        <Tile></Tile>
-      </div>
-    );
+    const ids = Array.from(new Array(9), (_, index) => index + 1);
+    const tiles = ids.map((id) => <Tile id={id} key={id}></Tile>);
+    return <div className="board">{tiles}</div>;
   }
 }
 
