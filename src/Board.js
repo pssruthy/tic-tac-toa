@@ -6,7 +6,6 @@ class Board extends React.Component {
   constructor(props) {
     super(props);
     this.state = {};
-    this.symbols = { 1: 'X', 2: 'O' };
   }
 
   render() {
@@ -17,7 +16,6 @@ class Board extends React.Component {
         key={id}
         player={this.props.player}
         onClick={this.props.onClick}
-        symbol={this.symbols[this.props.player]}
       />
     ));
     return <div className="board">{tiles}</div>;

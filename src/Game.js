@@ -18,11 +18,18 @@ const checkWinningCondition = (positions) => {
     condition.every((position) => positions.includes(position))
   );
 };
+
+const getGameStatus = (positions, turns) => {
+  if (checkWinningCondition(positions)) return 'won';
+  if (turns === 9) return 'draw';
+  return 'playing';
+};
+
 class Game extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      isGameOver: false,
+      status: 'playing',
       player: 1,
       turns: 0,
       positions: { 1: [], 2: [] },
@@ -39,26 +46,32 @@ class Game extends React.Component {
         [`${player}`]: playerPositions,
         [`${oppositePlayer}`]: state.positions[oppositePlayer].slice(),
       };
-      const isGameOver = checkWinningCondition(playerPositions);
-      const nextPlayer = isGameOver ? player : oppositePlayer;
+      const status = getGameStatus(playerPositions, state.turns + 1);
+      const nextPlayer = status !== 'playing' ? player : oppositePlayer;
       return {
         player: nextPlayer,
         turns: state.turns + 1,
         positions,
-        isGameOver,
+        status,
       };
     });
   }
 
   render() {
+    if (this.state.status === 'playing')
+      return (
+        <div>
+          <Board player={this.state.player} onClick={this.handleClick}></Board>
+          <Status
+            status={this.state.status}
+            player={this.state.player}
+            turns={this.state.turns}
+          ></Status>
+        </div>
+      );
     return (
-      <div>
-        <Board player={this.state.player} onClick={this.handleClick}></Board>
-        <Status
-          gameOver={this.state.isGameOver}
-          player={this.state.player}
-          turns={this.state.turns}
-        ></Status>
+      <div className="game">
+        <Status status={this.state.status} player={this.state.player}></Status>
       </div>
     );
   }

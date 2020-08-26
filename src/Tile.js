@@ -21,7 +21,11 @@ class Tile extends React.Component {
 
   render() {
     return (
-      <div className="tile" id={this.props.id} onClick={this.handleClick}>
+      <div
+        className={`tile ${this.state.symbol === '' ? 'empty' : ''}`}
+        id={this.props.id}
+        onClick={this.handleClick}
+      >
         {this.state.symbol}
       </div>
     );
