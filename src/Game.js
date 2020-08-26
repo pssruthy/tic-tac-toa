@@ -2,6 +2,22 @@ import React from 'react';
 import Board from './Board.js';
 import Status from './Status.js';
 
+const winningCombinations = [
+  [1, 2, 3],
+  [4, 5, 6],
+  [7, 8, 9],
+  [1, 4, 7],
+  [2, 5, 8],
+  [3, 6, 9],
+  [1, 5, 9],
+  [3, 5, 7],
+];
+
+const checkWinningCondition = (positions) => {
+  return winningCombinations.some((condition) =>
+    condition.every((position) => positions.includes(position))
+  );
+};
 class Game extends React.Component {
   constructor(props) {
     super(props);
@@ -23,10 +39,13 @@ class Game extends React.Component {
         [`${player}`]: playerPositions,
         [`${oppositePlayer}`]: state.positions[oppositePlayer].slice(),
       };
+      const isGameOver = checkWinningCondition(playerPositions);
+      const nextPlayer = isGameOver ? player : oppositePlayer;
       return {
-        player: (state.player % 2) + 1,
+        player: nextPlayer,
         turns: state.turns + 1,
         positions,
+        isGameOver,
       };
     });
   }
@@ -38,6 +57,7 @@ class Game extends React.Component {
         <Status
           gameOver={this.state.isGameOver}
           player={this.state.player}
+          turns={this.state.turns}
         ></Status>
       </div>
     );

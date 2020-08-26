@@ -1,3 +1,7 @@
+.body {
+  align-items: center;
+}
+
 .board {
   margin: 0 auto;
   padding: 10px;
@@ -20,9 +24,29 @@
   transition: 0.3s;
 }
 
-.tile :hover {
+.tile:hover {
   cursor: pointer;
-  background-color: #1c46bc;
-  color: white;
+  background-color: rgba(128, 128, 128, 0.338);
+}
+
+.status {
+  margin: 0 auto;
   background-color: gray;
+  font-size: x-large;
+  width: 350px;
+  height: 40px;
+  text-align: center;
+}
+
+.won {
+  background-color: palegreen;
+}
+
+.draw {
+  background-color: orange;
+}
+
+.gameOver {
+  opacity: 0.7;
+  pointer-events: none;
 }
