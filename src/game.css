@@ -1,17 +1,14 @@
 .board {
-  margin: 0 auto;
+  margin: 5rem auto;
   padding: 10px;
-  height: 350px;
   width: 350px;
   display: flex;
   flex-wrap: wrap;
 }
 
 .tile {
-  border: 1px solid gray;
   height: 100px;
   width: 100px;
-  margin: 6px;
   text-align: center;
   vertical-align: middle;
   line-height: 12vh;
@@ -22,11 +19,11 @@
 
 .empty:hover {
   cursor: pointer;
-  background-color: rgba(128, 128, 128, 0.338);
+  background-color: rgba(128, 128, 128, 0.153);
 }
 
 .status {
-  margin: 0 auto;
+  margin: 5rem auto;
   background-color: gray;
   font-size: x-large;
   width: 350px;
@@ -52,4 +49,40 @@
 
 .game {
   margin: 0 auto;
+}
+
+.tile_0 {
+  border-right: 2px solid gray;
+  border-bottom: 2px solid gray;
+}
+
+.tile_1 {
+  border-right: 2px solid gray;
+  border-bottom: 2px solid gray;
+}
+
+.tile_2 {
+  border-bottom: 2px solid gray;
+}
+
+.tile_3 {
+  border-right: 2px solid gray;
+  border-bottom: 2px solid gray;
+}
+
+.tile_4 {
+  border-right: 2px solid gray;
+  border-bottom: 2px solid gray;
+}
+
+.tile_5 {
+  border-bottom: 2px solid gray;
+}
+
+.tile_6 {
+  border-right: 2px solid gray;
+}
+
+.tile_7 {
+  border-right: 2px solid gray;
 }
