@@ -13,4 +13,16 @@
   width: 100px;
   margin: 6px;
   text-align: center;
+  vertical-align: middle;
+  line-height: 12vh;
+  font-size: xx-large;
+  color: black;
+  transition: 0.3s;
+}
+
+.tile :hover {
+  cursor: pointer;
+  background-color: #1c46bc;
+  color: white;
+  background-color: gray;
 }
