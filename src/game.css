@@ -10,7 +10,6 @@
   height: 100px;
   width: 100px;
   text-align: center;
-  vertical-align: middle;
   line-height: 12vh;
   font-size: xx-large;
   color: black;
@@ -35,7 +34,7 @@
   background-color: palegreen;
 }
 
-.draw {
+.drawn {
   background-color: orange;
 }
 
