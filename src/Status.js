@@ -1,17 +1,17 @@
 import React from 'react';
 
-const Status = (props) => {
+const Status = ({ player, winner, isDrawn }) => {
   let className = '';
-  let status = `Player ${props.player} turn`;
-  if (props.status === 'draw') {
+  let message = `${player}'s turn`;
+  if (isDrawn) {
     className = 'draw gameOver';
-    status = 'Draw';
+    message = 'Drawn';
   }
-  if (props.status === 'won') {
+  if (winner !== null) {
     className = 'won gameOver';
-    status = `Player ${props.player} won`;
+    message = `${player} won the game`;
   }
-  return <div className={`status ${className}`}>{status}</div>;
+  return <div className={`message ${className}`}>{message}</div>;
 };
 
 export default Status;

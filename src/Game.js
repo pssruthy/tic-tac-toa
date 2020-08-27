@@ -13,64 +13,66 @@ const winningCombinations = [
   [2, 4, 6],
 ];
 
-const checkWinningCondition = (positions, symbol) => {
+const isWon = (positions, symbol) => {
   return winningCombinations.some((condition) =>
     condition.every((position) => positions[position] === symbol)
   );
-};
-
-const getGameStatus = (positions, symbol, turns) => {
-  if (checkWinningCondition(positions, symbol)) return 'won';
-  if (turns === 9) return 'draw';
-  return 'playing';
 };
 
 class Game extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      status: 'playing',
-      player: 1,
-      turns: 0,
-      positions: Array.from(new Array(9), () => ''),
+      currentPlayer: { name: 'Sruthy', symbol: 'X' },
+      nextPlayer: { name: 'Ridhu', symbol: 'O' },
+      tilesStatus: Array.from(new Array(9), () => ''),
+      isDrawn: false,
+      winner: null,
     };
     this.handleClick = this.handleClick.bind(this);
   }
 
-  handleClick(e) {
-    const id = e.target.id;
-    const symbols = { 1: 'X', 2: 'O' };
-    const playerSymbol = symbols[this.state.player];
-    const oppositePlayer = (this.state.player % 2) + 1;
+  handleClick(id) {
+    return this.setState((state) => {
+      const { currentPlayer, nextPlayer, tilesStatus } = state;
+      const newTilesStatus = tilesStatus.slice();
 
-    const positions = this.state.positions.slice();
-    positions[id] = symbols[this.state.player];
-
-    const turns = this.state.turns + 1;
-    const status = getGameStatus(positions, playerSymbol, turns);
-    const player = status !== 'playing' ? this.state.player : oppositePlayer;
-
-    return this.setState({ status, player, turns, positions });
+      newTilesStatus[id] = currentPlayer.symbol;
+      const isPlayerWon = isWon(newTilesStatus, currentPlayer.symbol);
+      const winner = isPlayerWon ? currentPlayer.name : null;
+      const isDrawn = !newTilesStatus.includes('');
+      return {
+        currentPlayer: nextPlayer,
+        nextPlayer: currentPlayer,
+        tilesStatus: newTilesStatus,
+        isDrawn,
+        winner,
+      };
+    });
   }
 
   render() {
-    if (this.state.status === 'playing')
+    if (!this.state.winner && !this.state.isDrawn)
       return (
         <div>
           <Status
-            status={this.state.status}
-            player={this.state.player}
-            turns={this.state.turns}
+            player={this.state.currentPlayer.name}
+            winner={this.state.winner}
+            isDrawn={this.state.isDrawn}
           ></Status>
           <Board
             onClick={this.handleClick}
-            positions={this.state.positions}
+            tilesStatus={this.state.tilesStatus}
           ></Board>
         </div>
       );
     return (
       <div className="game">
-        <Status status={this.state.status} player={this.state.player}></Status>
+        <Status
+          player={this.state.currentPlayer.name}
+          winner={this.state.winner}
+          isDrawn={this.state.isDrawn}
+        />
       </div>
     );
   }

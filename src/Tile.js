@@ -1,14 +1,16 @@
 import React from 'react';
 import './game.css';
 
-const Tile = (props) => {
+const Tile = ({ id, symbol, onClick }) => {
   return (
     <div
-      className={`tile tile_${props.id} ${props.symbol === '' ? 'empty' : ''}`}
-      id={props.id}
-      onClick={props.onClick}
+      className={`tile tile_${id} ${symbol === '' ? 'empty' : ''}`}
+      id={id}
+      onClick={() => {
+        if (symbol === '') onClick(id);
+      }}
     >
-      {props.symbol}
+      {symbol}
     </div>
   );
 };
